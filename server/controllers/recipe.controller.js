@@ -126,3 +126,50 @@ exports.unlikeRecipe = async (req, res) => {
     res.status(500).json({ errors: err });
   }
 };
+
+//comment
+
+exports.addComment = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    const recipe = await Recipe.findById(req.params.id);
+    const NewComment = {
+      text: req.body.text,
+      FirstName: user.FirstName,
+      user: req.user.id,
+    };
+    recipe.comments.unshift(NewComment);
+    await recipe.save();
+    res.status(201).json(recipe.comments);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ errors: 'Recipe not added', err });
+  }
+};
+
+exports.deleteComment = async (req, res) => {
+  try {
+    const recipe = await Recipe.findById(req.params.id);
+
+    //get the comment
+    const comment = recipe.comments.find(
+      (comment) => comment.id === req.params.comment_id
+    );
+    if (!comment) {
+      return res.status(404).json({ msg: 'comment does not exist' });
+    }
+    //check user
+    if (comment.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'not authorized!' });
+    }
+    //Remove index
+    const removeIndex = recipe.comments
+      .map((comment) => comment.user.toString())
+      .indexOf(req.user.id);
+    recipe.comments.splice(removeIndex, 1);
+    await recipe.save();
+    res.json(recipe.comments);
+  } catch (err) {
+    res.status(500).json({ errors: err });
+  }
+};
