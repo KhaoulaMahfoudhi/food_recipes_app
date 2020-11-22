@@ -1,0 +1,12 @@
+.search {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .input-search {
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    width: 250px;
+    padding: 5px;
+  }

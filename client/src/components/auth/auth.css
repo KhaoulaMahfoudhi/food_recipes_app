@@ -1,0 +1,16 @@
+.container {
+  max-width: 1100px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 1rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+.Register-lead {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  font-family: 'Roboto', sans-serif !important;
+}
+.fas {
+  color: rgb(196, 62, 107) !important;
+}

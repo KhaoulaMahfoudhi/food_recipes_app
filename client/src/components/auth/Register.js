@@ -1,0 +1,99 @@
+import React, { useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import './auth.css';
+
+const Register = () => {
+  const [formData, setFormData] = useState({
+    FirstName: '',
+    LastName: '',
+    email: '',
+    password: '',
+    password2: '',
+  });
+  const { FirstName, LastName, email, password, password2 } = formData;
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (password !== password2) {
+      console.log('not match');
+    } else {
+      console.log('success');
+    }
+  };
+  return (
+    <Form className="container" onSubmit={(e) => onSubmit(e)}>
+      <Form.Group controlId="formBasicEmail">
+        <h1 style={{ color: 'rgb(196, 62, 107)' }}>Sign Up</h1>
+        <p className="Register-lead">
+          <i className="fas fa-user"></i> Create Your Account
+        </p>
+        <Form.Label>First Name</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter Your First Name"
+          name="FirstName"
+          value={FirstName}
+          onChange={(e) => onChange(e)}
+          required
+        />
+        <Form.Label>Last Name</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter Your Last Name"
+          name="LastName"
+          value={LastName}
+          onChange={(e) => onChange(e)}
+          required
+        />
+        <Form.Label>Email address</Form.Label>
+        <Form.Control
+          type="email"
+          placeholder="Enter email"
+          name="email"
+          value={email}
+          onChange={(e) => onChange(e)}
+          required
+        />
+      </Form.Group>
+
+      <Form.Group controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          name="password"
+          value={password}
+          onChange={(e) => onChange(e)}
+          required
+        />
+      </Form.Group>
+      <Form.Group controlId="formBasicPassword">
+        <Form.Label>Confirm Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Confirm Password"
+          name="password2"
+          value={password2}
+          onChange={(e) => onChange(e)}
+          required
+        />
+      </Form.Group>
+      <Button
+        style={{ backgroundColor: 'rgb(196, 62, 107)', border: 'none' }}
+        variant="primary"
+        type="submit"
+        value="Register"
+      >
+        Register
+      </Button>
+      <p>
+        Already have an account? <Link to="/login">Sing In</Link>
+      </p>
+    </Form>
+  );
+};
+
+export default Register;
