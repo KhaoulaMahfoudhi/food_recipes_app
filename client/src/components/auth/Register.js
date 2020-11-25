@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alert.js';
+import { register } from '../../actions/auth';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './auth.css';
+import PropTypes from 'prop-types';
 
-const Register = () => {
+const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
     FirstName: '',
     LastName: '',
@@ -18,9 +22,9 @@ const Register = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      console.log('not match');
+      setAlert('Password not match!', 'danger');
     } else {
-      console.log('success');
+      register({ FirstName, LastName, email, password });
     }
   };
   return (
@@ -46,8 +50,8 @@ const Register = () => {
           name="LastName"
           value={LastName}
           onChange={(e) => onChange(e)}
-          required
         />
+
         <Form.Label>Email address</Form.Label>
         <Form.Control
           type="email"
@@ -67,7 +71,7 @@ const Register = () => {
           name="password"
           value={password}
           onChange={(e) => onChange(e)}
-          required
+          minLength="6"
         />
       </Form.Group>
       <Form.Group controlId="formBasicPassword">
@@ -78,7 +82,7 @@ const Register = () => {
           name="password2"
           value={password2}
           onChange={(e) => onChange(e)}
-          required
+          minLength="6"
         />
       </Form.Group>
       <Button
@@ -95,5 +99,8 @@ const Register = () => {
     </Form>
   );
 };
-
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+};
+export default connect(null, { setAlert, register })(Register);

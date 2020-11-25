@@ -3,7 +3,16 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const secretOrKey = config.get('secretOrKey');
 const bcrypt = require('bcryptjs');
+const { findById } = require('../Models/User');
 
+exports.minroot = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ msg: 'server error' });
+  }
+};
 exports.register = async (req, res) => {
   const { FirstName, LastName, email, password } = req.body;
   const searchUser = await User.findOne({ email });
@@ -21,7 +30,14 @@ exports.register = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     newUser.password = await bcrypt.hash(password, salt);
     await newUser.save(newUser);
-    res.status(201).json({ msg: 'User added successfully' });
+    const payload = {
+      id: newUser._id,
+      FirstName: newUser.FirstName,
+      LastName: newUser.LastName,
+      email: newUser.email,
+    };
+    const token = await jwt.sign(payload, secretOrKey, { expiresIn: 3600 });
+    res.status(201).json({ token: `Bearer ${token}` });
   } catch (err) {
     console.log(err);
     res.status(500).json({ errors: 'User not added', err });

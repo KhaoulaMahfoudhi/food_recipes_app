@@ -1,23 +1,35 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect } from 'react';
 import './App.css';
 import NavBar from './components/Navbare/Navbar';
 import { Switch, Route } from 'react-router-dom';
 import Landing from './components/Landing/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import About from './components/About/About';
+import Alert from './components/alert/Alert';
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
+import store from './store/store';
 
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 const App = () => {
-  const [isAuth, setIsAuth] = useState(false);
-  const login = () => setIsAuth(true);
-  const logout = () => setIsAuth(false);
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
   return (
     <Fragment>
-      <NavBar isAuth={isAuth} login={login} logout={logout} />
-      <Switch>
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-      </Switch>
+      <NavBar />
+      <Route exact path="/" component={Landing} />
+      <section className="container">
+        <Alert />
+        <Switch>
+          <Route exact path="/about" component={About} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+        </Switch>
+      </section>
     </Fragment>
   );
 };

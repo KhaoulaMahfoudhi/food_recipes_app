@@ -1,0 +1,39 @@
+.x-largeA {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  margin-top: 0.2rem !important;
+  text-align: center;
+  font-family: 'Modak', cursive !important;
+  color: rgb(215, 18, 124);
+}
+.largeA {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: white;
+  font-family: 'Sansita Swashed', cursive !important;
+}
+
+.img {
+  width: 200px;
+  margin-left: 430px;
+}
+
+.AboutContainer {
+  background-image: linear-gradient(-20deg, #f794a4 0%, #fdd6bd 100%);
+  min-height: 100vh;
+  margin: 0px !important;
+  padding: 0px !important;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.About-lead {
+  font-size: 1.4rem;
+  margin: 1rem;
+  font-family: 'Sansita Swashed', cursive !important;
+  text-align: center;
+  color: rgb(44, 29, 42);
+}

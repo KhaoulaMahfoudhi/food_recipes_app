@@ -16,7 +16,7 @@ const NavBare = ({ isAuth, login, logout }) => {
         </Navbar.Brand>
         <Nav className="mr-auto">
           <Link className="link" to="/about">
-            About Us
+            About
           </Link>
           <Link className="link" to="/register">
             Register

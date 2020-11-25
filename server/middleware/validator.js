@@ -14,7 +14,7 @@ exports.RegisterRules = () => [
   check(
     'password',
     'Please enter a password with 5 or more charachter'
-  ).isLength({ min: 5 }),
+  ).isLength({ min: 6 }),
 ];
 
 exports.LoginRules = () => [
