@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
 import { Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './auth.css';
 
-const Login = ({ login }) => {
+const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -19,8 +19,12 @@ const Login = ({ login }) => {
     e.preventDefault();
     login(email, password);
   };
+  //Redirect case login
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
   return (
-    <Form className="container" onSubmit={(e) => onSubmit(e)}>
+    <Form className="containerauth" onSubmit={(e) => onSubmit(e)}>
       <Form.Group controlId="formBasicEmail">
         <h1 style={{ color: 'rgb(196, 62, 107)' }}>Sign In</h1>
         <p className="Register-lead">
@@ -64,6 +68,10 @@ const Login = ({ login }) => {
 };
 Login.propTypes = {
   login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
 
-export default connect(null, { login })(Login);
+export default connect(mapStateToProps, { login })(Login);

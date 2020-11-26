@@ -7,7 +7,7 @@
 .landing-inner {
   color: #fff;
   height: 100%;
-  width: 80%;
+  width: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -63,11 +63,10 @@
 
 .section__inner {
   zoom: 1;
-  max-width: 1015px;
-  padding: 0 20px;
+  width: 100%;
+  padding: 0 10px;
   margin: 0 auto;
   position: relative;
-  height: 30px;
 }
 .main-footer {
   font-size: 1em;
@@ -85,6 +84,7 @@
   color: rgb(192, 32, 192);
   outline: 0;
   transition: all 0.2s ease 0s;
+  padding-bottom: 10px;
 }
 .linkFooter {
   color: rgb(64, 11, 88);
@@ -97,9 +97,10 @@
   color: rgb(207, 119, 207);
   text-decoration: none !important;
 }
-.section__inner span {
+.section__inner p span {
   cursor: pointer;
   color: rgb(85, 79, 85);
+  text-decoration: underline;
 }
 .section__inner span:hover {
   color: rgb(207, 119, 207);

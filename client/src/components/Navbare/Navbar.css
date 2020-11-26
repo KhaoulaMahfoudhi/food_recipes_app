@@ -1,7 +1,7 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 0.7rem 2rem;
   position: fixed;
   z-index: 1;
@@ -24,7 +24,7 @@
 }
 
 .navbar span {
-  margin-right: 450px;
+  margin-right: 460px;
   color: pink;
   font-size: x-large;
   font-family: 'Indie Flower', cursive !important;

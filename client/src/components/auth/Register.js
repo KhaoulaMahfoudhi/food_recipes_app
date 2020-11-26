@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert.js';
 import { register } from '../../actions/auth';
 import { Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './auth.css';
 import PropTypes from 'prop-types';
 
-const Register = ({ setAlert, register }) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     FirstName: '',
     LastName: '',
@@ -27,8 +27,12 @@ const Register = ({ setAlert, register }) => {
       register({ FirstName, LastName, email, password });
     }
   };
+  //Redirect case login
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
   return (
-    <Form className="container" onSubmit={(e) => onSubmit(e)}>
+    <Form className="containerauth" onSubmit={(e) => onSubmit(e)}>
       <Form.Group controlId="formBasicEmail">
         <h1 style={{ color: 'rgb(196, 62, 107)' }}>Sign Up</h1>
         <p className="Register-lead">
@@ -102,5 +106,11 @@ const Register = ({ setAlert, register }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
-export default connect(null, { setAlert, register })(Register);
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, register })(Register);

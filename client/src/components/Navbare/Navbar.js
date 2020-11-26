@@ -1,9 +1,38 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../../actions/auth';
 import './Navbar.css';
 
-const NavBare = ({ isAuth, login, logout }) => {
+const NavBare = ({ auth: { isAuthenticated, loading }, logout }) => {
+  const authLinks = (
+    <Nav className="mr-auto">
+      <Link className="link" to="/about">
+        About
+      </Link>
+      <Link onClick={logout} className="link" to="#!">
+        {' '}
+        <i className="fas fa-sign-out-alt"></i>
+        Logout
+      </Link>
+    </Nav>
+  );
+  const guestLinks = (
+    <Nav className="mr-auto">
+      <Link className="link" to="/about">
+        About
+      </Link>
+      <Link className="link" to="/register">
+        Register
+      </Link>
+      <Link className="link" to="/login">
+        Login
+      </Link>
+    </Nav>
+  );
+
   return (
     <div>
       <Navbar bg="dark" variant="dark">
@@ -14,29 +43,19 @@ const NavBare = ({ isAuth, login, logout }) => {
             <span> So YummY </span>
           </Link>
         </Navbar.Brand>
-        <Nav className="mr-auto">
-          <Link className="link" to="/about">
-            About
-          </Link>
-          <Link className="link" to="/register">
-            Register
-          </Link>
-          <Link className="link" to="/login">
-            Login
-          </Link>
-        </Nav>
-        {/* <Form inline>
-          <Button
-            className="button"
-            onClick={isAuth ? logout : login}
-            variant="primary"
-          >
-            {isAuth ? 'Logout' : 'Login'}
-          </Button>
-        </Form> */}
+        {!loading && (
+          <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+        )}
+        ;
       </Navbar>
     </div>
   );
 };
-
-export default NavBare;
+NavBare.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps, { logout })(NavBare);

@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const secretOrKey = config.get('secretOrKey');
 const bcrypt = require('bcryptjs');
-const { findById } = require('../Models/User');
 
 exports.minroot = async (req, res) => {
   try {

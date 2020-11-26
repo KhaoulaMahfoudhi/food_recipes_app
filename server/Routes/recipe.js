@@ -16,7 +16,7 @@ const isAuth = require('../middleware/passport-jwt');
 const router = express.Router();
 
 router.post('/addrecipe', isAuth(), RecipeRules(), validator, addRecipe);
-router.get('/showRecipes', showRecipes);
+router.get('/showRecipes', isAuth(), showRecipes);
 router.get('/onerecipe/:id', isAuth(), showOneRecipe);
 router.put('/updateRecipe/:id', isAuth(), editRecipe);
 router.delete('/deleteRecipe/:id', isAuth(), deleteRecipes);

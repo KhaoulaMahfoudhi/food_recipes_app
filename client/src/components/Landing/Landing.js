@@ -31,7 +31,10 @@ const Landing = () => {
             <span> So YummY </span>
           </Link>
           <p>
-            ©2018-2020 SO YummY, by <span> Khaoula </span>
+            ©2018-2020 SO YummY, by{' '}
+            <Link className="linkFooter" to="/about">
+              <span> Khaoula </span>
+            </Link>
           </p>
           <div className="link-to">
             <Link className="linkFooter" to="/about">

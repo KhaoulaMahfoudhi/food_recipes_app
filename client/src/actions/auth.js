@@ -7,6 +7,7 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  LOGOUT,
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -16,7 +17,7 @@ export const loadUser = () => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
   try {
-    const res = await axios.get('/api');
+    const res = await axios.get('/');
     dispatch({
       type: USER_LOAD,
       payload: res.data,
@@ -81,4 +82,9 @@ export const login = (email, password) => async (dispatch) => {
       type: LOGIN_FAIL,
     });
   }
+};
+
+//LOGOUT
+export const logout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
 };
