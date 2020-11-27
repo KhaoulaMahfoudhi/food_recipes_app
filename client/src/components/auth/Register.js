@@ -29,7 +29,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   };
   //Redirect case login
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/posts" />;
   }
   return (
     <Form className="containerauth" onSubmit={(e) => onSubmit(e)}>

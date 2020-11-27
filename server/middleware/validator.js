@@ -3,9 +3,9 @@ const { check, validationResult } = require('express-validator');
 exports.RecipeRules = () => [
   check('title', 'This field is required').notEmpty(),
   check('FirstName', 'This field is required').notEmpty(),
-  check('image', 'This field is required').notEmpty(),
   check('ingredients', 'This field is required').notEmpty(),
   check('description', 'This field is required').notEmpty(),
+  check('image', 'This field is required').notEmpty(),
 ];
 exports.RegisterRules = () => [
   check('FirstName', 'This field is required').notEmpty(),

@@ -1,0 +1,64 @@
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 10px;
+}
+.PostsCard {
+  display: flex;
+  justify-content: space-around;
+  margin: 8px;
+}
+.x-largeD {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  margin-top: 0.2rem !important;
+  text-align: center;
+  font-family: 'Modak', cursive !important;
+  color: rgb(215, 18, 124);
+}
+.DashboardContainer {
+  background-image: linear-gradient(
+    to right,
+    #ff8177 0%,
+    #ff867a 0%,
+    #ff8c7f 21%,
+    #f99185 52%,
+    #cf556c 78%,
+    #b12a5b 100%
+  );
+  min-height: 100vh;
+  margin: auto !important;
+  padding: 5px !important;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.images {
+  height: 330px;
+}
+.section__inner {
+  zoom: 1;
+  width: 100%;
+  padding: 0 10px;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 5px;
+}
+.main-footer {
+  font-size: 1em;
+  color: #ababab;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  background-color: rgb(73, 78, 83);
+}
+.main-footer p {
+  margin-bottom: 0.4em;
+}
+
+.section__inner p span {
+  color: rgb(207, 119, 207);
+  text-decoration: none !important;
+}

@@ -1,0 +1,106 @@
+.post {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 100vh;
+  background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+}
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.polaroid {
+  width: 85%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 10px;
+}
+.container {
+  text-align: center;
+  padding: 10px 20px;
+}
+.image {
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  padding: 5px;
+  width: 280px;
+  margin-left: 38%;
+  margin-top: 8px;
+}
+.circle {
+  list-style-type: circle;
+}
+.x-largeP {
+  font-size: 3rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  margin-top: 5px;
+  font-family: 'Courgette', cursive !important;
+  color: rgb(196, 62, 107);
+  text-align: center;
+}
+.large li {
+  font-size: 1.2rem;
+  line-height: 1;
+  margin-left: 20px;
+  margin-bottom: 1rem;
+  margin-top: 0.2rem !important;
+  font-family: 'Ubuntu', sans-serif;
+  color: rgb(37, 36, 36);
+}
+.large p {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  margin-top: 0.2rem !important;
+  margin-left: 25px;
+  font-family: 'Ubuntu', sans-serif;
+  color: rgb(37, 36, 36);
+}
+
+.section__inner {
+  zoom: 1;
+  width: 100%;
+  padding: 0 10px;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 5px;
+}
+.main-footer {
+  font-size: 1em;
+  color: #ababab;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  background-color: rgb(73, 78, 83);
+}
+.main-footer p {
+  margin-bottom: 0.4em;
+}
+
+.linkFooter {
+  color: rgb(240, 235, 235);
+  padding: 0.45rem;
+  margin: 0 0.25rem;
+  font-size: 18px;
+  text-decoration: none !important;
+}
+.linkFooter :hover {
+  color: rgb(207, 119, 207);
+  text-decoration: none !important;
+}
+.section__inner p span {
+  cursor: pointer;
+  color: rgb(240, 235, 235);
+  text-decoration: underline;
+}
+.section__inner span:hover {
+  color: rgb(207, 119, 207);
+  text-decoration: none !important;
+}
+.link-to :hover {
+  color: rgb(207, 119, 207);
+  text-decoration: none !important;
+}

@@ -12,7 +12,10 @@ const NavBare = ({ auth: { isAuthenticated, loading }, logout }) => {
       <Link className="link" to="/about">
         About
       </Link>
-      <Link onClick={logout} className="link" to="#!">
+      <Link className="link" to="/posts">
+        Recipes
+      </Link>
+      <Link className="link" onClick={logout} to="">
         {' '}
         <i className="fas fa-sign-out-alt"></i>
         Logout
@@ -46,7 +49,6 @@ const NavBare = ({ auth: { isAuthenticated, loading }, logout }) => {
         {!loading && (
           <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
         )}
-        ;
       </Navbar>
     </div>
   );

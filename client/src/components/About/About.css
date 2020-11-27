@@ -2,7 +2,7 @@
   font-size: 2.5rem;
   line-height: 1.2;
   margin-bottom: 1rem;
-  margin-top: 0.2rem !important;
+  margin-top: 10px;
   text-align: center;
   font-family: 'Modak', cursive !important;
   color: rgb(215, 18, 124);
@@ -18,7 +18,7 @@
 
 .img {
   width: 200px;
-  margin-left: 530px;
+  margin-left: 560px;
 }
 
 .AboutContainer {
@@ -87,4 +87,12 @@
 .link-to :hover {
   color: rgb(207, 119, 207);
   text-decoration: none !important;
+}
+.cardChef {
+  margin-left: 530px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+a {
+  margin: 4px;
 }

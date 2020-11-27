@@ -12,6 +12,7 @@ import setAuthToken from './utils/setAuthToken';
 import store from './store/store';
 import PrivateRoute from './components/privateroute/PrivateRoute';
 import Dashboard from './components/dashboard/Dashboard';
+import Post from './components/post/Post';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -25,12 +26,13 @@ const App = () => {
       <NavBar />
       <Route exact path="/" component={Landing} />
       <Route exact path="/about" component={About} />
-      <section className="container">
+      <section>
         <Alert />
         <Switch>
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/posts" component={Dashboard} />
+          <PrivateRoute exact path="/posts/:id" component={Post} />
         </Switch>
       </section>
     </Fragment>

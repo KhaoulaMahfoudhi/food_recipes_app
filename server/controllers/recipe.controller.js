@@ -9,8 +9,8 @@ exports.addRecipe = async (req, res) => {
       title: req.body.title,
       FirstName: user.FirstName,
       image: req.body.image,
-      ingredients: req.body.image,
-      description: req.body.image,
+      ingredients: req.body.ingredients,
+      description: req.body.description,
       user: req.user.id,
     });
     const recipe = await NewRecipe.save();
