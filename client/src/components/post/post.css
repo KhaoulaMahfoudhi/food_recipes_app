@@ -26,12 +26,14 @@
   border-radius: 50%;
   padding: 5px;
   width: 280px;
+  height: 300px;
   margin-left: 38%;
   margin-top: 8px;
 }
-.circle {
-  list-style-type: circle;
+.list {
+  list-style-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
 }
+
 .x-largeP {
   font-size: 3rem;
   line-height: 1.5;
@@ -52,12 +54,23 @@
 }
 .large p {
   font-size: 1.3rem;
+  text-align: justify;
   line-height: 1.5;
   margin-bottom: 1rem;
+  margin-right: 1.5rem;
   margin-top: 0.2rem !important;
   margin-left: 25px;
   font-family: 'Ubuntu', sans-serif;
   color: rgb(37, 36, 36);
+}
+.large span {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  margin-top: 0.2rem !important;
+  margin-left: 25px;
+  font-family: 'Courgette', cursive !important;
+  color: rgb(196, 62, 107);
 }
 
 .section__inner {

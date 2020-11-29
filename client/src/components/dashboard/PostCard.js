@@ -11,12 +11,44 @@ const PostCard = ({
   removeLike,
   deletePost,
   auth,
-  recipe: { _id, title, FirstName, image, user, likes, comments, date },
+  recipe: {
+    _id,
+    title,
+    FirstName,
+    image,
+    user,
+    likes,
+    comments,
+    date,
+    time,
+    serving,
+  },
 }) => {
   return (
     <div className="PostsCard">
       <Card style={{ width: '18rem' }}>
         <Card.Img variant="top" className="images" src={image} />
+
+        <div className="Card-over">
+          {' '}
+          <Card>
+            <Card.Title style={{ textAlign: 'center', marginTop: '5px' }}>
+              <i
+                className="far fa-clock"
+                style={{ color: 'rgb(184, 52, 95)' }}
+              ></i>{' '}
+              {time}
+            </Card.Title>
+            <Card.Title style={{ textAlign: 'center' }}>
+              <i
+                className="fas fa-users"
+                style={{ color: 'rgb(184, 52, 95)' }}
+              ></i>{' '}
+              {serving}{' '}
+            </Card.Title>
+          </Card>
+        </div>
+
         <Card.Body>
           <Card.Title className="x-largeD">{title}</Card.Title>
           <Card.Title>
@@ -36,9 +68,9 @@ const PostCard = ({
           <Button onClick={(e) => removeLike(_id)} variant="primary">
             <i className="fas fa-thumbs-down" />
           </Button>
-          {!auth.loading && user !== auth.user._id && (
+          {!auth.loading && user === auth.user._id && (
             <Button onClick={(e) => deletePost(_id)} variant="danger">
-              delete
+              <i className="far fa-trash-alt"></i>
             </Button>
           )}
           <Link to={`/posts/${_id}`}>

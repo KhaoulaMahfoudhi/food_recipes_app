@@ -3,11 +3,13 @@
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 10px;
+  margin-top: 20px;
 }
 .PostsCard {
   display: flex;
   justify-content: space-around;
   margin: 8px;
+  overflow: hidden;
 }
 .x-largeD {
   font-size: 2.5rem;
@@ -61,4 +63,19 @@
 .section__inner p span {
   color: rgb(207, 119, 207);
   text-decoration: none !important;
+}
+
+.Card-over {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  max-height: 100%;
+  background-color: white;
+  transform: translateY(-102%);
+  transition: transform 0.3s ease-in-out;
+}
+.PostsCard:hover .Card-over {
+  transform: translateY(10%);
 }

@@ -5,6 +5,8 @@ import {
   UPDATE_LIKES,
   DELETE_POST,
   ADD_POST,
+  ADD_COMMENT,
+  REMOVE_COMMENT,
 } from '../actions/types';
 const initialState = {
   recipes: [],
@@ -54,6 +56,23 @@ export default function (state = initialState, action) {
             ? { ...recipe, likes: payload.likes }
             : recipe
         ),
+        loading: false,
+      };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        recipe: { ...state.recipe, comments: payload },
+        loading: false,
+      };
+    case REMOVE_COMMENT:
+      return {
+        ...state,
+        recipe: {
+          ...state.recipe,
+          comments: state.recipe.comments.filter(
+            (comment) => comment._id !== payload
+          ),
+        },
         loading: false,
       };
     default:

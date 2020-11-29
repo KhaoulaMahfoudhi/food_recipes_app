@@ -17,8 +17,7 @@ const NavBare = ({ auth: { isAuthenticated, loading }, logout }) => {
       </Link>
       <Link className="link" onClick={logout} to="">
         {' '}
-        <i className="fas fa-sign-out-alt"></i>
-        Logout
+        <i className="fas fa-sign-out-alt"></i> Logout
       </Link>
     </Nav>
   );

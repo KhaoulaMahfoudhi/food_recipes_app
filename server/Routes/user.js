@@ -15,7 +15,7 @@ const {
 const isAuth = require('../middleware/passport-jwt');
 
 const router = express.Router();
-router.get('/', isAuth(), minroot);
+router.get('/api/login/', isAuth(), minroot);
 router.post('/api/register', RegisterRules(), validator, register);
 router.post('/api/login', LoginRules(), validator, login);
 router.get('/api/showUsers', isAuth(), showUsers);
