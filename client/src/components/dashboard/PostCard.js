@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { Card, Button } from 'react-bootstrap';
+import PostForm from './PostForm';
 import { addLike, removeLike, deletePost, addPost } from '../../actions/post';
 import './dashboard.css';
 const PostCard = ({
@@ -11,6 +12,7 @@ const PostCard = ({
   removeLike,
   deletePost,
   auth,
+  recipe,
   recipe: {
     _id,
     title,
@@ -73,6 +75,10 @@ const PostCard = ({
               <i className="far fa-trash-alt"></i>
             </Button>
           )}
+          {!auth.loading && user === auth.user._id && (
+            <PostForm edit={true} recipe={recipe} _id={_id} />
+          )}
+
           <Link to={`/posts/${_id}`}>
             <Button style={{ margin: '5px' }} variant="primary">
               details

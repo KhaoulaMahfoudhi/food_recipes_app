@@ -9,6 +9,7 @@ import {
   ADD_POST,
   ADD_COMMENT,
   REMOVE_COMMENT,
+  EDIT_POST,
 } from './types';
 
 export const getPosts = () => async (dispatch) => {
@@ -121,17 +122,9 @@ export const getPost = (id) => async (dispatch) => {
   }
 };
 
-export const addComment = (postId, { text }) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-  const body = JSON.stringify({
-    text,
-  });
+export const addComment = (postId, formData) => async (dispatch) => {
   try {
-    const res = await axios.post(`/addComment/${postId}`, body, config);
+    const res = await axios.post(`/addComment/${postId}`, formData);
     dispatch({
       type: ADD_COMMENT,
       payload: res.data,
@@ -145,12 +138,12 @@ export const addComment = (postId, { text }) => async (dispatch) => {
   }
 };
 
-export const deleteComment = (postId, CommentId) => async (dispatch) => {
+export const deleteComment = (postId, commentId) => async (dispatch) => {
   try {
-    await axios.delete(`/addComment/${postId}/${CommentId}`);
+    await axios.delete(`/deleteComment/${postId}/${commentId}`);
     dispatch({
       type: REMOVE_COMMENT,
-      payload: CommentId,
+      payload: commentId,
     });
     dispatch(setAlert('Comment Removed', 'success'));
   } catch (err) {
@@ -160,3 +153,26 @@ export const deleteComment = (postId, CommentId) => async (dispatch) => {
     });
   }
 };
+
+export const editPost = (postId, formData) => async (dispatch) => {
+  try {
+    const res = await axios.put(`/updateRecipe/${postId}`, formData);
+    dispatch({
+      type: EDIT_POST,
+      payload: res.data,
+    });
+    dispatch(setAlert('Post Updeted', 'success'));
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// export const editPost = ({ updatedPost, postId }) => (dispatch) => {
+//   axios
+//     .put(`/updateRecipe/${postId}`, updatedPost)
+//     .then((res) => dispatch(getPosts()))
+//     .catch((err) => console.log(err));
+// };

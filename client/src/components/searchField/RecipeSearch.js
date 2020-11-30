@@ -5,8 +5,8 @@ export const RecipeSearch = ({ setNameSearch }) => {
   return (
     <div className="cover">
       <form className="form">
-        <div class="tb">
-          <div class="td">
+        <div className="tb">
+          <div className="td">
             <input
               className="input"
               name="search"

@@ -2,34 +2,44 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addComment } from '../../actions/post';
+import './comment.css';
+import { Form, Button } from 'react-bootstrap';
 
 const CommentForm = ({ postId, addComment }) => {
   const [text, setText] = useState(' ');
   return (
-    <div>
-      <div>
-        <h3>Leave a Comment</h3>
-      </div>
-      <div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            addComment(postId, { text });
-            setText('');
-          }}
-        >
-          <textarea
-            name="text"
-            cols="30"
-            row="5"
-            placeholder="add a comment"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            required
-          />
-          <input type="Submit" value="Submit" />
-        </form>
-      </div>
+    <div className="CommentContainer">
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          addComment(postId, { text });
+          setText('');
+        }}
+      >
+        <Form.Label className="large"> Leave a Comment</Form.Label>
+        <div className="containerformBtn">
+          <div>
+            <Form.Control
+              className="commentinput"
+              name="text"
+              placeholder="comment the post"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <Button
+              variant="danger"
+              style={{ marginLeft: '10px' }}
+              value="Submit"
+              type="submit"
+            >
+              Comment
+            </Button>
+          </div>
+        </div>
+      </Form>
     </div>
   );
 };

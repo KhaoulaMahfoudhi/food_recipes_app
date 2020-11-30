@@ -5,6 +5,7 @@ import { Spinner, Button } from 'react-bootstrap';
 import { getPost } from '../../actions/post';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentForm';
+import CommentItem from './CommentItem';
 import './post.css';
 const Post = ({ getPost, post: { recipe, loading }, match }) => {
   useEffect(() => {
@@ -35,8 +36,16 @@ const Post = ({ getPost, post: { recipe, loading }, match }) => {
             </div>
           </div>
         </div>
+
+        <CommentForm postId={recipe._id} />
         <div>
-          <CommentForm postId={recipe._id} />
+          {recipe.comments.map((comment) => (
+            <CommentItem
+              key={comment._id}
+              comment={comment}
+              postId={recipe._id}
+            />
+          ))}
         </div>
 
         <div>
@@ -44,7 +53,7 @@ const Post = ({ getPost, post: { recipe, loading }, match }) => {
             <Button
               variant="secondary"
               style={{
-                margin: '20px',
+                margin: '8px 0px 10px 3px',
                 padding: ' 0.4rem 1.3rem',
                 fontSize: '1rem',
               }}
@@ -77,6 +86,7 @@ const Post = ({ getPost, post: { recipe, loading }, match }) => {
 
 Post.propTypes = {
   post: PropTypes.object.isRequired,
+  getPost: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => ({
   post: state.post,

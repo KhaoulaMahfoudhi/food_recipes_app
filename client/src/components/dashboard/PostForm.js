@@ -1,11 +1,11 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addPost } from '../../actions/post';
+import { addPost, editPost } from '../../actions/post';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { BiAddToQueue } from 'react-icons/bi';
 
-const PostForm = ({ addPost }) => {
+const PostForm = ({ addPost, edit, editPost, recipe, _id }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -17,29 +17,35 @@ const PostForm = ({ addPost }) => {
     ingredients: '',
     image: '',
   });
-
   const { title, FirstName, description, ingredients, image } = formData;
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
-    addPost({
-      title,
-      FirstName,
-      description,
-      ingredients,
-      image,
-    });
+    edit
+      ? editPost(_id, { title, FirstName, description, ingredients, image })
+      : addPost({
+          title,
+          FirstName,
+          description,
+          ingredients,
+          image,
+        });
     handleClose();
   };
 
   return (
     <Fragment>
-      <BiAddToQueue size="50px" onClick={handleShow} />
-
+      {edit ? (
+        <Button onClick={handleShow} variant="warning">
+          <i className="fas fa-edit"></i>
+        </Button>
+      ) : (
+        <BiAddToQueue size="50px" onClick={handleShow} />
+      )}
       <Modal show={show} onHide={handleClose} onSubmit={(e) => onSubmit(e)}>
         <Modal.Header closeButton>
-          <Modal.Title>Add a New Recipe</Modal.Title>
+          <Modal.Title>{edit ? 'Edit Recipe' : 'Add a New Recipe'}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -47,7 +53,7 @@ const PostForm = ({ addPost }) => {
               <Form.Label>Title</Form.Label>
               <Form.Control
                 name="title"
-                placeholder="Enter Recipe Title "
+                placeholder={edit ? recipe.title : 'Enter Recipe Title '}
                 value={title}
                 onChange={(e) => onChange(e)}
               />
@@ -56,7 +62,7 @@ const PostForm = ({ addPost }) => {
               <Form.Label>FirstName</Form.Label>
               <Form.Control
                 name="FirstName"
-                placeholder="Enter your First Name "
+                placeholder={edit ? recipe.FirstName : 'Enter Your FirstName '}
                 value={FirstName}
                 onChange={(e) => onChange(e)}
               />
@@ -65,7 +71,7 @@ const PostForm = ({ addPost }) => {
               <Form.Label>Ingredient</Form.Label>
               <Form.Control
                 name="ingredients"
-                placeholder="Enter your First Name "
+                placeholder="ingredients..."
                 value={ingredients}
                 onChange={(e) => onChange(e)}
               />
@@ -74,7 +80,7 @@ const PostForm = ({ addPost }) => {
               <Form.Label>Description</Form.Label>
               <Form.Control
                 name="description"
-                placeholder="Enter your First Name "
+                placeholder="description ... "
                 value={description}
                 onChange={(e) => onChange(e)}
               />
@@ -83,7 +89,9 @@ const PostForm = ({ addPost }) => {
               <Form.Label>Image</Form.Label>
               <Form.Control
                 name="image"
-                placeholder="Enter your First Name "
+                placeholder={
+                  edit ? recipe.image : 'Enter the Recipe Image URL '
+                }
                 value={image}
                 onChange={(e) => onChange(e)}
               />
@@ -100,7 +108,7 @@ const PostForm = ({ addPost }) => {
             value="Submit"
             onClick={(e) => onSubmit(e)}
           >
-            Add Recipe
+            {edit ? 'Edit Recipe' : 'Add Recipe'}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -110,6 +118,7 @@ const PostForm = ({ addPost }) => {
 
 PostForm.propTypes = {
   addPost: PropTypes.func.isRequired,
+  editPost: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addPost })(PostForm);
+export default connect(null, { addPost, editPost })(PostForm);
