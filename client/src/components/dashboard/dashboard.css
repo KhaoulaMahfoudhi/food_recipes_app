@@ -3,22 +3,30 @@
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 10px;
-  margin-top: 20px;
+  margin-top: 40px;
 }
-.PostsCard {
+.PostsContainer {
   display: flex;
   justify-content: space-around;
   margin: 8px;
   overflow: hidden;
 }
 .x-largeD {
-  font-size: 2.5rem;
+  font-size: 1.8rem !important;
   line-height: 1.2;
   margin-bottom: 1rem;
   margin-top: 0.2rem !important;
   text-align: center;
-  font-family: 'Modak', cursive !important;
-  color: rgb(215, 18, 124);
+  font-family: 'Nerko One', cursive;
+  color: rgb(240, 174, 209);
+}
+.largeD {
+  font-size: 1.4rem !important;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  margin-top: 0.2rem !important;
+  font-family: 'Ubuntu', sans-serif;
+  color: rgb(243, 232, 238);
 }
 .DashboardContainer {
   background-image: linear-gradient(
@@ -59,10 +67,18 @@
 .main-footer p {
   margin-bottom: 0.4em;
 }
-
 .section__inner p span {
   color: rgb(207, 119, 207);
   text-decoration: none !important;
+}
+.PostCard {
+  background-color: rgb(124, 121, 121) !important;
+  color: rgb(236, 233, 233) !important;
+  border-radius: 3% !important;
+  overflow: hidden !important;
+  border: solid 2px rgb(231, 179, 207) !important;
+  box-shadow: 0 4px 8px 0 rgba(85, 84, 84, 0.2) !important;
+  transition: 0.3s !important;
 }
 
 .Card-over {
@@ -76,6 +92,6 @@
   transform: translateY(-102%);
   transition: transform 0.3s ease-in-out;
 }
-.PostsCard:hover .Card-over {
+.PostsContainer:hover .Card-over {
   transform: translateY(10%);
 }

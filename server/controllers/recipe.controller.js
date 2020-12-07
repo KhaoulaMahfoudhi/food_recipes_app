@@ -1,5 +1,4 @@
 const Recipe = require('../Models/Recipe');
-const Profile = require('../Models/Profile');
 const User = require('../Models/User');
 
 exports.addRecipe = async (req, res) => {
@@ -11,6 +10,8 @@ exports.addRecipe = async (req, res) => {
       image: req.body.image,
       ingredients: req.body.ingredients,
       description: req.body.description,
+      time: req.body.time,
+      serving: req.body.serving,
       user: req.user.id,
     });
     const recipe = await NewRecipe.save();
@@ -57,7 +58,7 @@ exports.editRecipe = async (req, res) => {
       return res.status(401).json({ msg: 'not authorized' });
     }
     await recipe.updateOne({ $set: req.body });
-    await res.status(201).json({ msg: ' Recipe updated' });
+    await res.status(201).json(recipe);
   } catch (err) {
     if (err.kind === 'ObjectId') {
       return res.status(404).json({ msg: 'recipe not found' });
@@ -170,6 +171,22 @@ exports.deleteComment = async (req, res) => {
     await recipe.save();
     res.json(recipe.comments);
   } catch (err) {
+    res.status(500).json({ errors: err });
+  }
+};
+
+exports.editComment = async (req, res) => {
+  try {
+    const recipe = await Recipe.findById(req.params.id);
+    if (!recipe) {
+      return res.status(404).json({ msg: 'recipe not found' });
+    }
+    await recipe.updateOne({ $set: req.body });
+    await res.status(201).json(recipe);
+  } catch (err) {
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'recipe not found' });
+    }
     res.status(500).json({ errors: err });
   }
 };

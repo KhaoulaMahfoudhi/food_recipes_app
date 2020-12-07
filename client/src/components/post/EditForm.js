@@ -1,25 +1,25 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addPost } from '../../actions/post';
+import { editPost } from '../../actions/post';
 import { Button, Modal, Form } from 'react-bootstrap';
-import { BiAddToQueue } from 'react-icons/bi';
 
-const PostForm = ({ addPost }) => {
+const PostForm = ({ editPost, recipe }) => {
+  function refreshPage() {
+    window.location.reload(false);
+  }
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   const [formData, setFormData] = useState({
-    title: '',
-    FirstName: '',
-    description: '',
-    ingredients: '',
-    image: '',
-    time: '',
-    serving: '',
+    title: recipe.title,
+    FirstName: recipe.FirstName,
+    description: recipe.description,
+    ingredients: recipe.ingredients,
+    image: recipe.image,
+    time: recipe.time,
+    serving: recipe.serving,
   });
-
   const {
     title,
     FirstName,
@@ -33,7 +33,7 @@ const PostForm = ({ addPost }) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const onSubmit = async (e) => {
-    addPost({
+    editPost(recipe._id, {
       title,
       FirstName,
       description,
@@ -42,22 +42,24 @@ const PostForm = ({ addPost }) => {
       time,
       serving,
     });
+
     handleClose();
-    setFormData('');
+    refreshPage();
   };
 
   return (
     <Fragment>
-      <BiAddToQueue
-        size="50px"
+      <Button
         onClick={handleShow}
-        style={{ cursor: 'pointer', color: 'white' }}
-      />
+        variant="warning"
+        style={{ marginTop: '5px' }}
+      >
+        <i className="fas fa-edit"></i>
+      </Button>
       <Modal show={show} onHide={handleClose} onSubmit={(e) => onSubmit(e)}>
         <Modal.Header closeButton>
           <Modal.Title style={{ color: ' rgb(44, 138, 232)' }}>
-            {' '}
-            Add a New Recipe
+            Edit Recipe
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -66,70 +68,63 @@ const PostForm = ({ addPost }) => {
               <Form.Label>Title</Form.Label>
               <Form.Control
                 name="title"
-                placeholder="Enter Recipe Title"
+                placeholder={recipe.title}
                 value={title}
                 onChange={(e) => onChange(e)}
-                required
               />
             </Form.Group>
             <Form.Group controlId="formBasicName">
               <Form.Label>Time</Form.Label>
               <Form.Control
                 name="time"
-                placeholder="Cooking time ? "
+                placeholder={recipe.time}
                 value={time}
                 onChange={(e) => onChange(e)}
-                required
               />
             </Form.Group>
             <Form.Group controlId="formBasicName">
               <Form.Label>Serving</Form.Label>
               <Form.Control
                 name="serving"
-                placeholder="Serving ? "
+                placeholder={recipe.serving}
                 value={serving}
                 onChange={(e) => onChange(e)}
-                required
               />
             </Form.Group>
             <Form.Group controlId="formBasicName">
-              <Form.Label>First Name</Form.Label>
+              <Form.Label>FirstName</Form.Label>
               <Form.Control
                 name="FirstName"
-                placeholder="Enter Your FirstName "
+                placeholder={recipe.FirstName}
                 value={FirstName}
                 onChange={(e) => onChange(e)}
-                required
               />
             </Form.Group>
             <Form.Group controlId="formBasicDescription">
               <Form.Label>Ingredient</Form.Label>
               <Form.Control
                 name="ingredients"
-                placeholder="ingredients.."
+                placeholder={recipe.ingredients}
                 value={ingredients}
                 onChange={(e) => onChange(e)}
-                required
               />
             </Form.Group>
             <Form.Group controlId="formBasicDescription">
               <Form.Label>Description</Form.Label>
               <Form.Control
                 name="description"
-                placeholder="description ... "
+                placeholder={recipe.description}
                 value={description}
                 onChange={(e) => onChange(e)}
-                required
               />
             </Form.Group>
             <Form.Group controlId="formBasicImage">
               <Form.Label>Image</Form.Label>
               <Form.Control
                 name="image"
-                placeholder="Enter the Recipe Image URL "
+                placeholder={recipe.image}
                 value={image}
                 onChange={(e) => onChange(e)}
-                required
               />
             </Form.Group>
           </Form>
@@ -144,7 +139,7 @@ const PostForm = ({ addPost }) => {
             value="Submit"
             onClick={(e) => onSubmit(e)}
           >
-            Add Recipe
+            Edit Recipe
           </Button>
         </Modal.Footer>
       </Modal>
@@ -153,7 +148,7 @@ const PostForm = ({ addPost }) => {
 };
 
 PostForm.propTypes = {
-  addPost: PropTypes.func.isRequired,
+  editPost: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addPost })(PostForm);
+export default connect(null, { editPost })(PostForm);

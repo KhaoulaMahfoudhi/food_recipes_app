@@ -8,6 +8,7 @@ import {
   ADD_COMMENT,
   REMOVE_COMMENT,
   EDIT_POST,
+  EDIT_COMMENT,
 } from '../actions/types';
 const initialState = {
   recipes: [],
@@ -47,8 +48,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         recipes: state.recipes.map((recipe) =>
+          recipe._id === payload.postId ? { ...recipe, post: payload } : recipe
+        ),
+        loading: false,
+      };
+    case EDIT_COMMENT:
+      return {
+        ...state,
+        recipes: state.recipes.map((recipe) =>
           recipe._id === payload.postId
-            ? { ...recipe, posts: payload.post }
+            ? { ...recipe, comments: payload }
             : recipe
         ),
         loading: false,

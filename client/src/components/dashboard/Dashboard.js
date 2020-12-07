@@ -21,7 +21,7 @@ const Dashboard = ({ getPosts, post: { recipes, loading } }) => {
         <Spinner animation="border" variant="danger" />
       ) : (
         <Fragment>
-          <PostForm edit={false} />
+          <PostForm />
           <div className="posts">
             {recipes
               .filter((recipe) =>

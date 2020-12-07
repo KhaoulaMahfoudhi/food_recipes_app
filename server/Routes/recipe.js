@@ -9,6 +9,7 @@ const {
   unlikeRecipe,
   addComment,
   deleteComment,
+  editComment,
 } = require('../controllers/recipe.controller');
 const { validator, RecipeRules } = require('../middleware/validator');
 const isAuth = require('../middleware/passport-jwt');
@@ -24,4 +25,5 @@ router.put('/likeRecipe/:id', isAuth(), likeRecipe);
 router.put('/unlikeRecipe/:id', isAuth(), unlikeRecipe);
 router.post('/addComment/:id', isAuth(), addComment);
 router.delete('/deleteComment/:id/:comment_id', isAuth(), deleteComment);
+router.put('/editComment/:id/:comment_id', isAuth(), editComment);
 module.exports = router;

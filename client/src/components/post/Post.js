@@ -36,9 +36,11 @@ const Post = ({ getPost, post: { recipe, loading }, match }) => {
             </div>
           </div>
         </div>
+        <Fragment>
+          <CommentForm key={recipe._id} postId={recipe._id} />
+        </Fragment>
 
-        <CommentForm postId={recipe._id} />
-        <div>
+        <Fragment>
           {recipe.comments.map((comment) => (
             <CommentItem
               key={comment._id}
@@ -46,14 +48,13 @@ const Post = ({ getPost, post: { recipe, loading }, match }) => {
               postId={recipe._id}
             />
           ))}
-        </div>
-
-        <div>
+        </Fragment>
+        <Fragment>
           <Link to="/posts">
             <Button
               variant="secondary"
               style={{
-                margin: '8px 0px 10px 3px',
+                margin: '3px 2px 8px 100px',
                 padding: ' 0.4rem 1.3rem',
                 fontSize: '1rem',
               }}
@@ -61,7 +62,7 @@ const Post = ({ getPost, post: { recipe, loading }, match }) => {
               GO Back
             </Button>
           </Link>
-        </div>
+        </Fragment>
 
         <div>
           <footer className="main-footer">

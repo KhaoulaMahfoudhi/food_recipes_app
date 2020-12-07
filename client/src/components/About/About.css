@@ -1,24 +1,16 @@
-.x-largeA {
-  font-size: 2.5rem;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  margin-top: 10px;
-  text-align: center;
-  font-family: 'Modak', cursive !important;
-  color: rgb(215, 18, 124);
-}
 .largeA {
   font-size: 2rem;
   line-height: 1.2;
   margin-bottom: 1rem;
+  margin-top: 1.5rem;
   text-align: center;
-  color: white;
+  color: rgb(215, 18, 124);
   font-family: 'Sansita Swashed', cursive !important;
 }
 
 .img {
-  width: 200px;
-  margin-left: 560px;
+  width: 120px;
+  margin-left: 140%;
 }
 
 .AboutContainer {
@@ -35,7 +27,7 @@
   margin: 1rem;
   font-family: 'Sansita Swashed', cursive !important;
   text-align: center;
-  color: rgb(44, 29, 42);
+  color: rgb(73, 34, 68);
 }
 .section__inner {
   zoom: 1;
@@ -98,4 +90,10 @@ a {
 }
 .icon :hover {
   color: rgb(207, 119, 207);
+}
+.AboutText {
+  color: rgb(55, 57, 59);
+}
+.AboutTitle {
+  color: rgb(229, 125, 233);
 }

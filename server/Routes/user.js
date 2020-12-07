@@ -15,10 +15,10 @@ const {
 const isAuth = require('../middleware/passport-jwt');
 
 const router = express.Router();
-router.get('/api/login/', isAuth(), minroot);
-router.post('/api/register', RegisterRules(), validator, register);
-router.post('/api/login', LoginRules(), validator, login);
-router.get('/api/showUsers', isAuth(), showUsers);
-router.put('/api/editUser/:_id', isAuth(), editUser);
-router.delete('/api/deleteUser/:_id', isAuth(), deleteUser);
+router.get('/login/', isAuth(), minroot);
+router.post('/register', RegisterRules(), validator, register);
+router.post('/login', LoginRules(), validator, login);
+router.get('/showUsers', isAuth(), showUsers);
+router.put('/editUser/:_id', isAuth(), editUser);
+router.delete('/deleteUser/:_id', isAuth(), deleteUser);
 module.exports = router;

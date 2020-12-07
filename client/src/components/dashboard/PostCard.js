@@ -4,86 +4,90 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { Card, Button } from 'react-bootstrap';
-import PostForm from './PostForm';
 import { addLike, removeLike, deletePost, addPost } from '../../actions/post';
 import './dashboard.css';
-const PostCard = ({
-  addLike,
-  removeLike,
-  deletePost,
-  auth,
-  recipe,
-  recipe: {
-    _id,
-    title,
-    FirstName,
-    image,
-    user,
-    likes,
-    comments,
-    date,
-    time,
-    serving,
-  },
-}) => {
+import EditForm from '../post/EditForm';
+const PostCard = ({ addLike, removeLike, deletePost, auth, recipe }) => {
   return (
-    <div className="PostsCard">
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" className="images" src={image} />
+    <div className="PostsContainer">
+      <Card
+        className="PostCard"
+        style={{
+          width: '18rem',
+        }}
+      >
+        <Card.Img variant="top" className="images" src={recipe.image} />
 
         <div className="Card-over">
           {' '}
           <Card>
-            <Card.Title style={{ textAlign: 'center', marginTop: '5px' }}>
+            <Card.Title
+              style={{ textAlign: 'center', marginTop: '5px', color: '#333' }}
+            >
               <i
                 className="far fa-clock"
                 style={{ color: 'rgb(184, 52, 95)' }}
               ></i>{' '}
-              {time}
+              {recipe.time}
             </Card.Title>
-            <Card.Title style={{ textAlign: 'center' }}>
+            <Card.Title style={{ textAlign: 'center', color: '#333' }}>
               <i
                 className="fas fa-users"
                 style={{ color: 'rgb(184, 52, 95)' }}
               ></i>{' '}
-              {serving}{' '}
+              {recipe.serving}{' '}
             </Card.Title>
           </Card>
         </div>
 
         <Card.Body>
-          <Card.Title className="x-largeD">{title}</Card.Title>
-          <Card.Title>
+          <Card.Title className="x-largeD">{recipe.title}</Card.Title>
+          <Card.Title className="largeD">
             {' '}
-            posted by: {FirstName ? FirstName : 'khaoula'}{' '}
+            <span style={{ color: 'rgb(240, 174, 209)' }}>
+              posted by:{' '}
+            </span>{' '}
+            {recipe.FirstName ? recipe.FirstName : 'So YummY'}{' '}
           </Card.Title>
-          <Card.Title>
-            Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
+          <Card.Title className="largeD">
+            <span style={{ color: 'rgb(240, 174, 209)' }}>Posted on: </span>
+            <Moment format="YYYY/MM/DD">{recipe.date}</Moment>
           </Card.Title>
 
-          {comments.length > 0 && <Card.Text>{comments.text}</Card.Text>}
-
-          <Button onClick={(e) => addLike(_id)} variant="primary">
+          <Button onClick={(e) => addLike(recipe._id)} variant="light">
             <i className="fas fa-thumbs-up" />{' '}
-            {likes.length > 0 && <span>{likes.length}</span>}
+            {recipe.likes.length > 0 && <span>{recipe.likes.length}</span>}
           </Button>
-          <Button onClick={(e) => removeLike(_id)} variant="primary">
+          <Button onClick={(e) => removeLike(recipe._id)} variant="light">
             <i className="fas fa-thumbs-down" />
           </Button>
-          {!auth.loading && user === auth.user._id && (
-            <Button onClick={(e) => deletePost(_id)} variant="danger">
+
+          <Link to={`/posts/${recipe._id}`}>
+            <Button variant="light">
+              <i className="fas fa-comment"></i>
+              {recipe.comments.length > 0 && (
+                <span> {recipe.comments.length}</span>
+              )}
+            </Button>
+          </Link>
+          <Link to={`/posts/${recipe._id}`}>
+            <Button variant="light">
+              <i className="fas fa-info-circle"></i>
+            </Button>
+          </Link>
+
+          {!auth.loading && recipe.user === auth.user._id && (
+            <EditForm recipe={recipe} />
+          )}
+          {!auth.loading && recipe.user === auth.user._id && (
+            <Button
+              onClick={(e) => deletePost(recipe._id)}
+              variant="danger"
+              style={{ marginTop: '5px' }}
+            >
               <i className="far fa-trash-alt"></i>
             </Button>
           )}
-          {!auth.loading && user === auth.user._id && (
-            <PostForm edit={true} recipe={recipe} _id={_id} />
-          )}
-
-          <Link to={`/posts/${_id}`}>
-            <Button style={{ margin: '5px' }} variant="primary">
-              details
-            </Button>
-          </Link>
         </Card.Body>
       </Card>
     </div>

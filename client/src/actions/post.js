@@ -10,6 +10,7 @@ import {
   ADD_COMMENT,
   REMOVE_COMMENT,
   EDIT_POST,
+  EDIT_COMMENT,
 } from './types';
 
 export const getPosts = () => async (dispatch) => {
@@ -79,6 +80,8 @@ export const addPost = ({
   description,
   ingredients,
   image,
+  time,
+  serving,
 }) => async (dispatch) => {
   const config = {
     headers: {
@@ -91,6 +94,8 @@ export const addPost = ({
     description,
     ingredients,
     image,
+    time,
+    serving,
   });
   try {
     const res = await axios.post('/addrecipe', body, config);
@@ -159,7 +164,7 @@ export const editPost = (postId, formData) => async (dispatch) => {
     const res = await axios.put(`/updateRecipe/${postId}`, formData);
     dispatch({
       type: EDIT_POST,
-      payload: res.data,
+      payload: { postId, post: res.data },
     });
     dispatch(setAlert('Post Updeted', 'success'));
   } catch (err) {
@@ -170,9 +175,23 @@ export const editPost = (postId, formData) => async (dispatch) => {
   }
 };
 
-// export const editPost = ({ updatedPost, postId }) => (dispatch) => {
-//   axios
-//     .put(`/updateRecipe/${postId}`, updatedPost)
-//     .then((res) => dispatch(getPosts()))
-//     .catch((err) => console.log(err));
-// };
+export const editComment = (postId, commentId, formData) => async (
+  dispatch
+) => {
+  try {
+    const res = await axios.put(
+      `/editComment/${postId}/${commentId}`,
+      formData
+    );
+    dispatch({
+      type: EDIT_COMMENT,
+      payload: { postId, comments: res.data },
+    });
+    dispatch(setAlert('Comment Edit', 'success'));
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};

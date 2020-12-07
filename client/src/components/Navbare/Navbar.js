@@ -40,7 +40,10 @@ const NavBare = ({ auth: { isAuthenticated, loading }, logout }) => {
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand>
           {' '}
-          <i className="fas fa-cookie-bite"></i>{' '}
+          <i
+            className="fas fa-cookie-bite"
+            style={{ color: 'rgb(248, 197, 205)' }}
+          ></i>{' '}
           <Link to="/">
             <span> So YummY </span>
           </Link>

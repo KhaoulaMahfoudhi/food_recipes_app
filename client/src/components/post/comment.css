@@ -5,7 +5,7 @@
   align-items: flex-start;
   justify-content: space-around;
   margin-left: 100px;
-  width: 800px;
+  width: 1000px;
 }
 .commentinput {
   width: 800px;
@@ -19,43 +19,45 @@
   font-family: 'Courgette', cursive !important;
   color: rgb(238, 227, 231);
 }
-.commentBox {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: flex-start;
-  margin-top: 15px;
-  margin-left: 30px;
-}
-.contentName {
-  margin: 10px 20px 0px 5px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-}
-.deletebtn {
-  margin: 10px 2px 10px 40%;
-}
+
 .largeName {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   line-height: 1.5;
-  margin-bottom: 0.3rem;
-  margin-top: 0.2rem !important;
+  margin-bottom: 0.2rem;
+  margin-top: 15px !important;
   margin-left: 10px;
-  font-family: 'Ubuntu', sans-serif;
-  color: rgb(49, 44, 44);
+  margin-right: 3px;
+  font-family: 'Courgette', cursive !important;
+  color: rgb(196, 62, 107) !important;
 }
 .largeText {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  margin-bottom: 0.3rem;
-  margin-top: 0.2rem !important;
-  margin-left: 5px;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin-top: 15px !important;
+  margin-left: 2px;
   font-family: 'Ubuntu', sans-serif;
-  color: rgb(32, 7, 32);
+  color: rgb(66, 64, 66) !important;
 }
 .containerformBtn {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.commentBox {
+  background-color: rgb(255, 253, 253);
+  border: solid 2px rgb(236, 115, 206);
+  margin-left: 100px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 36%;
+}
+.contentText {
+  display: flex;
+  justify-content: space-between;
+}
+.btnDelite {
+  margin-right: 2px;
+  float: right;
 }

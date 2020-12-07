@@ -22,11 +22,6 @@ exports.LoginRules = () => [
   check('password', 'Password is required').notEmpty(),
 ];
 
-exports.ProfileRules = () => [
-  check('FirstName', 'FirstName is required').notEmpty(),
-  check('LastName', 'LastName is required').notEmpty(),
-];
-
 exports.validator = (req, res, next) => {
   const errors = validationResult(req);
   errors.isEmpty() ? next() : res.status(400).json({ errors: errors.array() });

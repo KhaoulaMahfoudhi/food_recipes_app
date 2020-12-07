@@ -13,3 +13,21 @@ body {
   background-color: #fff;
   color: #333;
 }
+/* Mobile Styles */
+@media screen and (max-width: 700px) {
+  .DashboardContainer {
+    margin-top: 8rem;
+  }
+  .navbar {
+    display: block;
+    text-align: center;
+  }
+  .navbar link {
+    text-align: center;
+    justify-content: center;
+  }
+  .navbar span {
+    display: none;
+    margin-bottom: 1rem;
+  }
+}
