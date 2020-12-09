@@ -21,56 +21,58 @@ const PostForm = ({ editComment, deleteComment, postId, comment, auth }) => {
 
   return (
     <Fragment>
-      <div className="commentBox">
-        <div className="contentText">
-          <span style={{ marginLeft: '20px', marginTop: '15px' }}>
-            <i className="fas fa-user fa-2x" />
-          </span>
+      <div className="container">
+        <div className="dialogbox">
+          <div className="body">
+            <span className="tip tip-up"></span>
+            <span style={{ marginLeft: '10px', marginTop: '17px' }}>
+              <i className="fas fa-user" />
+            </span>
 
-          <h1 className="largeName">{comment.FirstName} : </h1>
+            <h1 className="largeName">{comment.FirstName} : </h1>
 
-          <p className="largeText">
-            {editstate ? (
-              <Form.Control
-                name="text"
-                placeholder={comment.text}
-                value={text}
-                onChange={(e) => onChange(e)}
-              />
-            ) : (
-              <p>{text}</p>
-            )}
-          </p>
-        </div>
-
-        <div className="btnDelite">
-          {!auth.loading && comment.user === auth.user._id && (
-            <Button
-              variant="danger"
-              style={{ color: 'white', marginTop: '15px' }}
-              onClick={() => deleteComment(postId, comment._id)}
-            >
-              <i className="far fa-times"></i>
-            </Button>
-          )}
-          {!auth.loading && comment.user === auth.user._id && (
-            <Button
-              variant="warning"
-              value="Submit"
-              type="submit"
-              style={{ color: 'white', marginTop: '15px' }}
-              onClick={(e) => onSubmit(e)}
-            >
+            <div className="message">
               {editstate ? (
-                <i
-                  className="fas fa-check-circle"
-                  style={{ color: 'white' }}
-                ></i>
+                <Form.Control
+                  name="text"
+                  placeholder={comment.text}
+                  value={text}
+                  onChange={(e) => onChange(e)}
+                />
               ) : (
-                <i className="fas fa-edit" style={{ color: 'white' }}></i>
+                <span>{text}</span>
               )}
-            </Button>
-          )}
+            </div>
+            <div className="Comment-btn">
+              {!auth.loading && comment.user === auth.user._id && (
+                <Button
+                  variant="danger"
+                  style={{ color: 'white', marginTop: '8px' }}
+                  onClick={() => deleteComment(postId, comment._id)}
+                >
+                  <i className="far fa-times"></i>
+                </Button>
+              )}
+              {!auth.loading && comment.user === auth.user._id && (
+                <Button
+                  variant="warning"
+                  value="Submit"
+                  type="submit"
+                  style={{ color: 'white', marginTop: '8px' }}
+                  onClick={(e) => onSubmit(e)}
+                >
+                  {editstate ? (
+                    <i
+                      className="fas fa-check-circle"
+                      style={{ color: 'white' }}
+                    ></i>
+                  ) : (
+                    <i className="fas fa-edit" style={{ color: 'white' }}></i>
+                  )}
+                </Button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </Fragment>

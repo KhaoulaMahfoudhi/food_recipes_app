@@ -18,7 +18,7 @@ const CommentForm = ({ postId, addComment }) => {
       >
         <Form.Label className="large"> Leave a Comment</Form.Label>
         <div className="containerformBtn">
-          <div>
+          <div className="inputComment">
             <Form.Control
               className="commentinput"
               name="text"

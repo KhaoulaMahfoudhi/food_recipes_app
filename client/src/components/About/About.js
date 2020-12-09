@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { Image, Col, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './About.css';
 import { connect } from 'react-redux';
@@ -65,9 +64,6 @@ const About = ({ auth: { isAuthenticated, loading } }) => {
       <div className="AboutContainer">
         <div>
           <h1 className="largeA">Hello and welcome to So YummY !</h1>
-          <Col xs={4} md={4}>
-            <Image className="img" src="icon.png" roundedCircle />
-          </Col>
           <p className="About-lead">
             If you are new to So YummY, the one thing you should know about us{' '}
             <br />
@@ -82,57 +78,66 @@ const About = ({ auth: { isAuthenticated, loading } }) => {
           </p>
           <h1 className="largeA">Meet Our Chef</h1>
         </div>
-        <div>
-          <div className="cardChef">
-            <Card
-              style={{
-                width: '18rem',
-                borderRadius: '5%',
-                overflow: 'hidden',
-                border: 'solid 2px rgb(246, 217, 247)',
-              }}
-            >
-              <Card.Img
-                style={{ height: '300px' }}
-                variant="top"
-                src="https://www.earnmydegree.com/sites/all/files/public/images/shutterstock_187759205.jpg"
+        <div className="boxAbout">
+          <div className="cardAbout">
+            <div className="imgBxAbout">
+              <img
+                src="https://cdn.shortpixel.ai/spai/w_761+q_+ret_img+to_webp/https://www.tilda.com/professionals/wp-content/uploads/sites/2/2016/09/Steve-Munkley-Royal-Garden-638x967.jpg"
+                alt="images"
               />
-              <Card.Body>
-                <Card.Title className="AboutTitle">Jhon Smyth</Card.Title>
-                <Card.Text className="AboutText">
-                  "Cooking is about passion, so it may look slightly
-                  temperamental in a way that it's too assertive to the naked
-                  eye."
-                </Card.Text>
-
-                <a href="https://www.facebook.com" target="_blank">
-                  <Button className="icon" variant="secondary">
-                    <i className="fab fa-facebook"></i>
-                  </Button>{' '}
-                </a>
-
-                <a href="https://www.instagram.com" target="_blank">
-                  <Button className="icon" variant="secondary">
-                    <i className="fab fa-instagram"></i>
-                  </Button>{' '}
-                </a>
-
-                <a href="https://www.linkedin.com" target="_blank">
-                  <Button className="icon " variant="secondary">
-                    <i className="fab fa-linkedin"></i>
-                  </Button>{' '}
-                </a>
-
-                <a href="https://twitter.com" target="_blank">
-                  <Button className="icon" variant="secondary">
-                    <i className="fab fa-twitter"></i>
-                  </Button>{' '}
-                </a>
-              </Card.Body>
-            </Card>
+            </div>
+            <div className="details">
+              <h2>
+                Johen Doe
+                <br />
+                <span>Always cook with passion</span>
+                <ul>
+                  <li>
+                    {/* eslint-disable-next-line */}
+                    <a href="https://www.facebook.com" target="_blank">
+                      {' '}
+                      <i
+                        className="fab fa-facebook"
+                        style={{ color: ' rgb(73, 78, 83)' }}
+                      ></i>
+                    </a>
+                  </li>
+                  <li>
+                    {/* eslint-disable-next-line */}
+                    <a href="https://www.instagram.com" target="_blank">
+                      {' '}
+                      <i
+                        className="fab fa-instagram"
+                        style={{ color: 'rgb(73, 78, 83)' }}
+                      ></i>
+                    </a>
+                  </li>
+                  <li>
+                    {/* eslint-disable-next-line */}
+                    <a href="https://www.snapchat.com" target="_blank">
+                      <i
+                        className="fab fa-snapchat"
+                        style={{ color: ' rgb(73, 78, 83)' }}
+                      ></i>
+                    </a>
+                  </li>
+                  <li>
+                    {/* eslint-disable-next-line */}
+                    <a href="https://www.linkedin.com" target="_blank">
+                      {' '}
+                      <i
+                        className="fab fa-linkedin"
+                        style={{ color: ' rgb(73, 78, 83)' }}
+                      ></i>
+                    </a>
+                  </li>
+                </ul>
+              </h2>
+            </div>
           </div>
         </div>
       </div>
+
       {!loading && (
         <Fragment>{isAuthenticated ? authFooter : guestFooter}</Fragment>
       )}

@@ -54,7 +54,7 @@ const Post = ({ getPost, post: { recipe, loading }, match }) => {
             <Button
               variant="secondary"
               style={{
-                margin: '3px 2px 8px 100px',
+                margin: '10px 8px 8px 100px',
                 padding: ' 0.4rem 1.3rem',
                 fontSize: '1rem',
               }}

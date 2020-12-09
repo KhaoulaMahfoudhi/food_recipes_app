@@ -40,7 +40,7 @@ const PostCard = ({ addLike, removeLike, deletePost, auth, recipe }) => {
           </Card>
         </div>
 
-        <Card.Body>
+        <Card.Body style={{ width: '300px' }}>
           <Card.Title className="x-largeD">{recipe.title}</Card.Title>
           <Card.Title className="largeD">
             {' '}
@@ -53,41 +53,43 @@ const PostCard = ({ addLike, removeLike, deletePost, auth, recipe }) => {
             <span style={{ color: 'rgb(240, 174, 209)' }}>Posted on: </span>
             <Moment format="YYYY/MM/DD">{recipe.date}</Moment>
           </Card.Title>
-
-          <Button onClick={(e) => addLike(recipe._id)} variant="light">
-            <i className="fas fa-thumbs-up" />{' '}
-            {recipe.likes.length > 0 && <span>{recipe.likes.length}</span>}
-          </Button>
-          <Button onClick={(e) => removeLike(recipe._id)} variant="light">
-            <i className="fas fa-thumbs-down" />
-          </Button>
-
-          <Link to={`/posts/${recipe._id}`}>
-            <Button variant="light">
-              <i className="fas fa-comment"></i>
-              {recipe.comments.length > 0 && (
-                <span> {recipe.comments.length}</span>
-              )}
+          <div className="btnBox">
+            <Button onClick={(e) => addLike(recipe._id)} variant="light">
+              <i className="fas fa-thumbs-up" />{' '}
+              {recipe.likes.length > 0 && <span>{recipe.likes.length}</span>}
             </Button>
-          </Link>
-          <Link to={`/posts/${recipe._id}`}>
-            <Button variant="light">
-              <i className="fas fa-info-circle"></i>
+            <Button onClick={(e) => removeLike(recipe._id)} variant="light">
+              <i className="fas fa-thumbs-down" />
             </Button>
-          </Link>
 
-          {!auth.loading && recipe.user === auth.user._id && (
-            <EditForm recipe={recipe} />
-          )}
-          {!auth.loading && recipe.user === auth.user._id && (
-            <Button
-              onClick={(e) => deletePost(recipe._id)}
-              variant="danger"
-              style={{ marginTop: '5px' }}
-            >
-              <i className="far fa-trash-alt"></i>
-            </Button>
-          )}
+            <Link to={`/posts/${recipe._id}`}>
+              <Button variant="light">
+                <i className="fas fa-comment"></i>
+                {recipe.comments.length > 0 && (
+                  <span> {recipe.comments.length}</span>
+                )}
+              </Button>
+            </Link>
+            <Link to={`/posts/${recipe._id}`}>
+              <Button variant="light">
+                <i className="fas fa-info-circle"></i>
+              </Button>
+            </Link>
+          </div>
+          <div className="btnDltMdfy">
+            {!auth.loading && recipe.user === auth.user._id && (
+              <EditForm recipe={recipe} />
+            )}
+            {!auth.loading && recipe.user === auth.user._id && (
+              <Button
+                onClick={(e) => deletePost(recipe._id)}
+                variant="danger"
+                style={{ marginTop: '5px' }}
+              >
+                <i className="far fa-trash-alt"></i>
+              </Button>
+            )}
+          </div>
         </Card.Body>
       </Card>
     </div>

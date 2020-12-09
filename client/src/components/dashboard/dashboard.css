@@ -95,3 +95,12 @@
 .PostsContainer:hover .Card-over {
   transform: translateY(10%);
 }
+.btnBox {
+  display: flex;
+  justify-content: space-around;
+}
+.btnDltMdfy {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 5px;
+}
