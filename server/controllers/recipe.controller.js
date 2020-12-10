@@ -181,6 +181,15 @@ exports.editComment = async (req, res) => {
     if (!recipe) {
       return res.status(404).json({ msg: 'recipe not found' });
     }
+
+    //get the comment
+    const comment = recipe.comments.find(
+      (comment) => comment.id === req.params.comment_id
+    );
+    if (!comment) {
+      return res.status(404).json({ msg: 'comment does not exist' });
+    }
+
     await recipe.updateOne({ $set: req.body });
     await res.status(201).json(recipe);
   } catch (err) {

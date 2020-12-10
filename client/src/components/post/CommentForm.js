@@ -21,8 +21,8 @@ const CommentForm = ({ postId, addComment }) => {
           <div className="inputComment">
             <Form.Control
               className="commentinput"
+              placeholder="Leave a Comment"
               name="text"
-              placeholder="comment the post"
               value={text}
               onChange={(e) => setText(e.target.value)}
               required

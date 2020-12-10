@@ -106,7 +106,7 @@ const PostForm = ({ addPost }) => {
               <Form.Label>Ingredient</Form.Label>
               <Form.Control
                 name="ingredients"
-                placeholder="ingredients.."
+                placeholder="Eggs, Flour, ..."
                 value={ingredients}
                 onChange={(e) => onChange(e)}
                 required
@@ -116,7 +116,7 @@ const PostForm = ({ addPost }) => {
               <Form.Label>Description</Form.Label>
               <Form.Control
                 name="description"
-                placeholder="description ... "
+                placeholder="Step1, Step2, ... "
                 value={description}
                 onChange={(e) => onChange(e)}
                 required
