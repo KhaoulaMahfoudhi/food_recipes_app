@@ -1,5 +1,6 @@
 import {
   GET_POSTS,
+  GET_POSTS_ADMIN,
   GET_POST,
   POST_ERROR,
   UPDATE_LIKES,
@@ -21,6 +22,7 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case GET_POSTS:
+    case GET_POSTS_ADMIN:
       return {
         ...state,
         recipes: payload,

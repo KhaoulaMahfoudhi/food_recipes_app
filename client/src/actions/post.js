@@ -11,6 +11,8 @@ import {
   REMOVE_COMMENT,
   EDIT_POST,
   EDIT_COMMENT,
+  GET_POSTS_ADMIN,
+  REMOVE_COMMENT_ADMIN,
 } from './types';
 
 export const getPosts = () => async (dispatch) => {
@@ -188,6 +190,40 @@ export const editComment = (postId, commentId, formData) => async (
       payload: { postId, comments: res.data },
     });
     dispatch(setAlert('Comment Edit', 'success'));
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//for Admin
+export const getPostsAdmin = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/showPosts');
+    dispatch({
+      type: GET_POSTS_ADMIN,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//delete comment for Admin
+
+export const deleteCommentAdmin = (postId, commentId) => async (dispatch) => {
+  try {
+    await axios.delete(`/deleteCommentAdmin/${postId}/${commentId}`);
+    dispatch({
+      type: REMOVE_COMMENT_ADMIN,
+      payload: commentId,
+    });
+    dispatch(setAlert('Comment Removed', 'success'));
   } catch (err) {
     dispatch({
       type: POST_ERROR,

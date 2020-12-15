@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import { Spinner, Button } from 'react-bootstrap';
 import { getPost } from '../../actions/post';
 import { Link } from 'react-router-dom';
-import CommentForm from './CommentForm';
 import CommentItem from './CommentItem';
-import './post.css';
+import '../post/post.css';
 const Post = ({ getPost, post: { recipe, loading }, match }) => {
   useEffect(() => {
     getPost(match.params.id);
@@ -36,10 +35,6 @@ const Post = ({ getPost, post: { recipe, loading }, match }) => {
             </div>
           </div>
         </div>
-        <Fragment>
-          {' '}
-          <CommentForm key={recipe._id} postId={recipe._id} />
-        </Fragment>
 
         <Fragment>
           {recipe.comments.map((comment) => (
@@ -51,7 +46,7 @@ const Post = ({ getPost, post: { recipe, loading }, match }) => {
           ))}
         </Fragment>
         <Fragment>
-          <Link to="/posts">
+          <Link to="/showPosts">
             <Button
               variant="secondary"
               style={{

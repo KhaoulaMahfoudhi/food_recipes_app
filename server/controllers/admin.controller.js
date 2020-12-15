@@ -1,43 +1,40 @@
+const Admin = require('../Models/Admin');
 const User = require('../Models/User');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const secretOrKey = config.get('secretOrKey');
 const bcrypt = require('bcryptjs');
 
-exports.minroot = async (req, res) => {
+exports.Adminminroot = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
-    res.json(user);
+    const admin = await Admin.findById(req.admin.id).select('-password');
+    res.json(admin);
   } catch (err) {
     res.status(500).json({ msg: 'server error' });
   }
 };
-exports.register = async (req, res) => {
-  const { FirstName, LastName, email, password, avatar, bio } = req.body;
-  const searchUser = await User.findOne({ email });
-  if (searchUser)
+exports.Adminregister = async (req, res) => {
+  const { FirstName, LastName, email, password } = req.body;
+  const searchAdmin = await Admin.findOne({ email });
+  if (searchAdmin)
     return res
       .status(400)
-      .json({ errors: [{ msg: 'user already registered' }] });
+      .json({ errors: [{ msg: 'admin already registered' }] });
   try {
-    const newUser = new User({
+    const newAdmin = new Admin({
       FirstName,
       LastName,
       email,
       password,
-      avatar,
-      bio,
     });
     const salt = await bcrypt.genSalt(10);
-    newUser.password = await bcrypt.hash(password, salt);
-    await newUser.save(newUser);
+    newAdmin.password = await bcrypt.hash(password, salt);
+    await newAdmin.save(newAdmin);
     const payload = {
-      id: newUser._id,
-      FirstName: newUser.FirstName,
-      LastName: newUser.LastName,
-      email: newUser.email,
-      avatar: newUser.avatar,
-      bio: newUser.bio,
+      id: newAdmin._id,
+      FirstName: newAdmin.FirstName,
+      LastName: newAdmin.LastName,
+      email: newAdmin.email,
     };
     const token = await jwt.sign(payload, secretOrKey, { expiresIn: 3600 });
     res.status(201).json({ token: `Bearer ${token}` });
@@ -47,18 +44,18 @@ exports.register = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {
+exports.Adminlogin = async (req, res) => {
   const { password, email } = req.body;
   try {
-    const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ msg: 'bad Credentials' });
-    const isMatch = await bcrypt.compare(password, user.password);
+    const admin = await Admin.findOne({ email });
+    if (!admin) return res.status(404).json({ msg: 'bad Credentials' });
+    const isMatch = await bcrypt.compare(password, admin.password);
     if (!isMatch) return res.status(404).json({ msg: 'bad Credentials' });
     const payload = {
-      id: user._id,
-      FirstName: user.FirstName,
-      LastName: user.LastName,
-      email: user.email,
+      id: admin._id,
+      FirstName: admin.FirstName,
+      LastName: admin.LastName,
+      email: admin.email,
     };
     const token = await jwt.sign(payload, secretOrKey, { expiresIn: 3600 });
     res.status(201).json({ token: `Bearer ${token}` });
@@ -73,17 +70,6 @@ exports.showUsers = async (req, res) => {
     res.status(201).json(getUsers);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ errors: err });
-  }
-};
-
-exports.editUser = async (req, res) => {
-  const { FirstName, LastName, email, password } = req.body;
-  const { _id } = req.params;
-  try {
-    const updateUser = await User.findOneAndUpdate({ _id }, { $set: req.body });
-    await res.status(201).json({ msg: 'User update' });
-  } catch (err) {
     res.status(500).json({ errors: err });
   }
 };

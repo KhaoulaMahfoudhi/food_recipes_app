@@ -11,11 +11,22 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     FirstName: '',
     LastName: '',
+    avatar: '',
+
+    bio: '',
     email: '',
     password: '',
     password2: '',
   });
-  const { FirstName, LastName, email, password, password2 } = formData;
+  const {
+    FirstName,
+    LastName,
+    avatar,
+    bio,
+    email,
+    password,
+    password2,
+  } = formData;
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -24,7 +35,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     if (password !== password2) {
       setAlert('Password not match!', 'danger');
     } else {
-      register({ FirstName, LastName, email, password });
+      register({ FirstName, LastName, avatar, bio, email, password });
     }
   };
   //Redirect case login
@@ -53,6 +64,22 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           placeholder="Enter Your Last Name"
           name="LastName"
           value={LastName}
+          onChange={(e) => onChange(e)}
+        />
+        <Form.Label>Image</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter Your Image"
+          name="avatar"
+          value={avatar}
+          onChange={(e) => onChange(e)}
+        />
+        <Form.Label>Bio</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter Your bio"
+          name="bio"
+          value={bio}
           onChange={(e) => onChange(e)}
         />
 

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { Card, Button } from 'react-bootstrap';
-import { addLike, removeLike, deletePost, addPost } from '../../actions/post';
-import './dashboard.css';
-import EditForm from '../post/EditForm';
-const PostCard = ({ addLike, removeLike, deletePost, auth, recipe }) => {
+import { deletePost } from '../../actions/post';
+import '../dashboard/dashboard.css';
+
+const PostCard = ({ deletePost, recipe }) => {
   return (
     <div className="PostsContainer">
       <Card
@@ -54,15 +54,7 @@ const PostCard = ({ addLike, removeLike, deletePost, auth, recipe }) => {
             <Moment format="YYYY/MM/DD">{recipe.date}</Moment>
           </Card.Title>
           <div className="btnBox">
-            <Button onClick={(e) => addLike(recipe._id)} variant="light">
-              <i className="fas fa-thumbs-up" />{' '}
-              {recipe.likes.length > 0 && <span>{recipe.likes.length}</span>}
-            </Button>
-            <Button onClick={(e) => removeLike(recipe._id)} variant="light">
-              <i className="fas fa-thumbs-down" />
-            </Button>
-
-            <Link to={`/posts/${recipe._id}`}>
+            <Link to={`/showposts/${recipe._id}`}>
               <Button variant="light">
                 <i className="fas fa-comment"></i>
                 {recipe.comments.length > 0 && (
@@ -70,27 +62,14 @@ const PostCard = ({ addLike, removeLike, deletePost, auth, recipe }) => {
                 )}
               </Button>
             </Link>
-
-            <Link to={`/posts/${recipe._id}`}>
-              {' '}
+            <Link to={`/showposts/${recipe._id}`}>
               <Button variant="light">
                 <i className="fas fa-info-circle"></i>
               </Button>
             </Link>
-          </div>
-          <div className="btnDltMdfy">
-            {!auth.loading && recipe.user === auth.user._id && (
-              <EditForm recipe={recipe} />
-            )}
-            {!auth.loading && recipe.user === auth.user._id && (
-              <Button
-                onClick={(e) => deletePost(recipe._id)}
-                variant="danger"
-                style={{ marginTop: '5px' }}
-              >
-                <i className="far fa-trash-alt"></i>
-              </Button>
-            )}
+            <Button onClick={(e) => deletePost(recipe._id)} variant="danger">
+              <i className="far fa-trash-alt"></i>
+            </Button>
           </div>
         </Card.Body>
       </Card>
@@ -101,18 +80,10 @@ const PostCard = ({ addLike, removeLike, deletePost, auth, recipe }) => {
 PostCard.propTypes = {
   recipe: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  addLike: PropTypes.func.isRequired,
-  removeLike: PropTypes.func.isRequired,
-  deletePost: PropTypes.func.isRequired,
-  addPost: PropTypes.func.isRequired,
-};
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
 
-export default connect(mapStateToProps, {
-  addLike,
-  removeLike,
+  deletePost: PropTypes.func.isRequired,
+};
+
+export default connect(null, {
   deletePost,
-  addPost,
 })(PostCard);

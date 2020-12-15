@@ -13,6 +13,11 @@ import store from './store/store';
 import PrivateRoute from './components/privateroute/PrivateRoute';
 import Dashboard from './components/dashboard/Dashboard';
 import Post from './components/post/Post';
+import AdminLogin from './components/auth/AdminLogin';
+import Users from './components/Admin/Users';
+import DashboardAdmin from './components/Admin/DashboardAdmin';
+import PrivateRouteAdmin from './components/privateroute/PrivateRouteAdmin';
+import PostItem from './components/Admin/PostItem';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -31,8 +36,16 @@ const App = () => {
         <Switch>
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/Adminlogin" component={AdminLogin} />
           <PrivateRoute exact path="/posts" component={Dashboard} />
           <PrivateRoute exact path="/posts/:id" component={Post} />
+          <PrivateRouteAdmin
+            exact
+            path="/showPosts"
+            component={DashboardAdmin}
+          />
+          <PrivateRouteAdmin exact path="/showposts/:id" component={PostItem} />
+          <PrivateRouteAdmin exact path="/users" component={Users} />
         </Switch>
       </section>
     </Fragment>

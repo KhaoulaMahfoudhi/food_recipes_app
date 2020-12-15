@@ -1,9 +1,11 @@
 const Recipe = require('../Models/Recipe');
 const User = require('../Models/User');
+const Admin = require('../Models/Admin');
 
 exports.addRecipe = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
+
     const NewRecipe = new Recipe({
       title: req.body.title,
       FirstName: user.FirstName,
@@ -74,9 +76,9 @@ exports.deleteRecipes = async (req, res) => {
       return res.status(404).json({ msg: 'recipe not found' });
     }
     //check in user : the user how own the post his the onlu one can deleted
-    if (recipe.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: 'not authorized' });
-    }
+    // if (recipe.user.toString() !== req.user.id) {
+    //   return res.status(401).json({ msg: 'not authorized' });
+    // }
     await recipe.remove();
     await res.status(201).json({ msg: ' Recipe Deleted' });
   } catch (err) {
@@ -196,6 +198,36 @@ exports.editComment = async (req, res) => {
     if (err.kind === 'ObjectId') {
       return res.status(404).json({ msg: 'recipe not found' });
     }
+    res.status(500).json({ errors: err });
+  }
+};
+
+//for admin
+exports.showPosts = async (req, res) => {
+  try {
+    const getRecipes = await Recipe.find().sort({ date: -1 });
+    res.status(201).json(getRecipes);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ errors: err });
+  }
+};
+
+exports.deleteCommentAdmin = async (req, res) => {
+  try {
+    const recipe = await Recipe.findById(req.params.id);
+
+    //get the comment
+    const comment = recipe.comments.find(
+      (comment) => comment.id === req.params.comment_id
+    );
+    if (!comment) {
+      return res.status(404).json({ msg: 'comment does not exist' });
+    }
+    await comment.remove();
+    await recipe.save();
+    await res.json(recipe);
+  } catch (err) {
     res.status(500).json({ errors: err });
   }
 };

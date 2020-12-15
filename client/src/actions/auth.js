@@ -4,10 +4,13 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOAD,
+  ADMIN_LOAD,
+  LOGIN_ADMIN_SUCCESS,
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  AUTH_ADMIN_ERROR,
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -29,15 +32,27 @@ export const loadUser = () => async (dispatch) => {
   }
 };
 //Register User
-export const register = ({ FirstName, LastName, email, password }) => async (
-  dispatch
-) => {
+export const register = ({
+  FirstName,
+  LastName,
+  avatar,
+  bio,
+  email,
+  password,
+}) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
-  const body = JSON.stringify({ FirstName, LastName, email, password });
+  const body = JSON.stringify({
+    FirstName,
+    LastName,
+    avatar,
+    bio,
+    email,
+    password,
+  });
 
   try {
     const res = await axios.post('/register', body, config);
@@ -79,10 +94,62 @@ export const login = (email, password) => async (dispatch) => {
     dispatch({
       type: LOGIN_FAIL,
     });
+    dispatch(setAlert('Bad credential', 'danger'));
   }
 };
 
 //LOGOUT
 export const logout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
+};
+
+//Admin
+
+//load Admin
+export const loadAdmin = () => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+  try {
+    const res = await axios.get('/Adminlogin/');
+    dispatch({
+      type: ADMIN_LOAD,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ADMIN_ERROR,
+    });
+  }
+};
+
+//Login
+export const Adminlogin = (email, password) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  const body = JSON.stringify({ email, password });
+
+  try {
+    const res = await axios.post('/Adminlogin', body, config);
+    dispatch({
+      type: LOGIN_ADMIN_SUCCESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+    dispatch({
+      type: LOGIN_FAIL,
+    });
+    dispatch(setAlert('Bad credential', 'danger'));
+  }
+};
+//LOGOUT
+export const Adminlogout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
 };
