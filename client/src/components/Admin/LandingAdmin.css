@@ -1,10 +1,10 @@
-.landing {
+.landingAdmin {
   position: relative;
-  background: url('../../img/backgroundpink.jpg') no-repeat center center/cover;
+  background: url('../../img/background.jpg') no-repeat center center/cover;
   height: 100vh;
 }
 
-.landing-inner {
+.landing-innerAdmin {
   color: #fff;
   height: 100%;
   width: 100%;
@@ -21,8 +21,8 @@
   font-family: 'Courgette', cursive !important;
 }
 
-.dark-overlay {
-  background-color: rgba(37, 35, 37, 0.7);
+.dark-overlayAdmin {
+  background-color: rgba(37, 37, 37, 0.7);
   position: absolute;
   top: 0;
   left: 0;
@@ -61,49 +61,48 @@
   opacity: 0.8;
 }
 
-.section__inner {
+.section__innerAdmin {
   zoom: 1;
   width: 100%;
   padding: 0 10px;
   margin: 0 auto;
   position: relative;
 }
-.main-footer {
+.main-footerAdmin {
   font-size: 1em;
   color: #ababab;
   text-align: center;
-  padding: 0;
-  margin-top: 10px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  margin-top: 0;
+  margin-bottom: 0 !important;
+  background-color: rgb(54, 57, 59);
 }
 
-.link-to {
+.link-toAdmin {
   margin-top: 0.4em;
   color: rgb(192, 32, 192);
   outline: 0;
   transition: all 0.2s ease 0s;
-  padding-bottom: 10px;
+  padding-bottom: 0px;
 }
-.linkFooter {
-  color: rgb(64, 11, 88);
-  padding: 0.45rem;
-  margin: 0 0.25rem;
+.linkFooterAdmin {
+  color: rgb(231, 219, 236);
+  padding: auto;
+  margin: auto;
   font-size: 18px;
   text-decoration: none !important;
 }
-.linkFooter :hover {
+.linkFooterAdmin :hover {
   color: rgb(207, 119, 207);
   text-decoration: none !important;
 }
-.section__inner p span {
-  cursor: pointer;
-  color: rgb(85, 79, 85);
-  text-decoration: underline;
-}
-.section__inner span:hover {
+.section__innerAdmin p span {
   color: rgb(207, 119, 207);
-  text-decoration: none !important;
+  text-decoration: none;
 }
-.link-to :hover {
+
+.link-toAdmin :hover {
   color: rgb(207, 119, 207);
   text-decoration: none !important;
 }

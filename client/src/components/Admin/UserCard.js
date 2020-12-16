@@ -37,7 +37,6 @@ const UserCard = ({ deleteUser, user }) => {
 };
 
 UserCard.propTypes = {
-  recipe: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   deleteUser: PropTypes.func.isRequired,
 };

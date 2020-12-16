@@ -111,7 +111,7 @@ export const loadAdmin = () => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
   try {
-    const res = await axios.get('/Adminlogin/');
+    const res = await axios.get('/');
     dispatch({
       type: ADMIN_LOAD,
       payload: res.data,

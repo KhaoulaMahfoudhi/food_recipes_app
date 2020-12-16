@@ -11,7 +11,7 @@ const {
 } = require('../middleware/validator');
 
 const router = express.Router();
-router.get('/Adminlogin/', Adminminroot);
+router.get('/', Adminminroot);
 router.post('/Adminregister', RegisterRules(), validator, Adminregister);
 router.post('/Adminlogin', LoginRules(), validator, Adminlogin);
 module.exports = router;

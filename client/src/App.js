@@ -18,6 +18,7 @@ import Users from './components/Admin/Users';
 import DashboardAdmin from './components/Admin/DashboardAdmin';
 import PrivateRouteAdmin from './components/privateroute/PrivateRouteAdmin';
 import PostItem from './components/Admin/PostItem';
+import LandingAdmin from './components/Admin/LandingAdmin';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -46,6 +47,11 @@ const App = () => {
           />
           <PrivateRouteAdmin exact path="/showposts/:id" component={PostItem} />
           <PrivateRouteAdmin exact path="/users" component={Users} />
+          <PrivateRouteAdmin
+            exact
+            path="/landingadmin"
+            component={LandingAdmin}
+          />
         </Switch>
       </section>
     </Fragment>

@@ -9,6 +9,16 @@ import './Navbar.css';
 const NavBare = ({ auth: { isAuthenticated, loading, isAdmin }, logout }) => {
   const authLinks = (
     <Nav className="mr-auto">
+      <Navbar.Brand>
+        {' '}
+        <i
+          className="fas fa-cookie-bite"
+          style={{ color: 'rgb(248, 197, 205)' }}
+        ></i>{' '}
+        <Link to="/">
+          <span> So YummY </span>
+        </Link>
+      </Navbar.Brand>
       <Link className="link" to="/about">
         About
       </Link>
@@ -23,6 +33,16 @@ const NavBare = ({ auth: { isAuthenticated, loading, isAdmin }, logout }) => {
   );
   const guestLinks = (
     <Nav className="mr-auto">
+      <Navbar.Brand>
+        {' '}
+        <i
+          className="fas fa-cookie-bite"
+          style={{ color: 'rgb(248, 197, 205)' }}
+        ></i>{' '}
+        <Link to="/">
+          <span> So YummY </span>
+        </Link>
+      </Navbar.Brand>
       <Link className="link" to="/register">
         Register
       </Link>
@@ -30,12 +50,19 @@ const NavBare = ({ auth: { isAuthenticated, loading, isAdmin }, logout }) => {
         Login
       </Link>
       <Link className="link" to="/AdminLogin">
-        Admin
+        <i className="fas fa-users-cog"></i> Admin
       </Link>
     </Nav>
   );
   const adminLinks = (
     <Nav className="mr-auto">
+      <Navbar.Brand>
+        {' '}
+        <i className="fas fa-tools"></i>{' '}
+        <Link to="/landingadmin">
+          <span> Admin Area </span>
+        </Link>
+      </Navbar.Brand>
       <Link className="link" to="/users">
         Users
       </Link>
@@ -52,16 +79,6 @@ const NavBare = ({ auth: { isAuthenticated, loading, isAdmin }, logout }) => {
   return (
     <div>
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand>
-          {' '}
-          <i
-            className="fas fa-cookie-bite"
-            style={{ color: 'rgb(248, 197, 205)' }}
-          ></i>{' '}
-          <Link to="/">
-            <span> So YummY </span>
-          </Link>
-        </Navbar.Brand>
         {!loading &&
           (isAdmin ? (
             <Fragment>{isAdmin ? adminLinks : guestLinks}</Fragment>

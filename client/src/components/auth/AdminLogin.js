@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { Adminlogin } from '../../actions/auth';
 import { Form, Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import { setAlert } from '../../actions/alert.js';
+
 import './auth.css';
 
-const AdminLogin = ({ setAlert, Adminlogin, isAuthenticated }) => {
+const AdminLogin = ({ Adminlogin, isAdmin }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -21,15 +21,15 @@ const AdminLogin = ({ setAlert, Adminlogin, isAuthenticated }) => {
     Adminlogin(email, password);
   };
   //Redirect case login
-  if (isAuthenticated) {
-    return <Redirect to="/users" />;
+  if (isAdmin) {
+    return <Redirect to="/landingadmin" />;
   }
   return (
     <Form className="containerauth" onSubmit={(e) => onSubmit(e)}>
       <Form.Group controlId="formBasicEmail">
         <h1 style={{ color: 'rgb(196, 62, 107)' }}>Sign In</h1>
         <p className="Register-lead">
-          <i className="fas fa-user"></i> Sign Into Your Admin Account
+          <i className="fas fa-user-cog"></i> Sign Into Your Admin Account
         </p>
         <Form.Label>Email address</Form.Label>
         <Form.Control
@@ -66,11 +66,10 @@ const AdminLogin = ({ setAlert, Adminlogin, isAuthenticated }) => {
 };
 AdminLogin.propTypes = {
   Adminlogin: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
-  setAlert: PropTypes.func.isRequired,
+  isAdmin: PropTypes.bool,
 };
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  isAdmin: state.auth.isAdmin,
 });
 
-export default connect(mapStateToProps, { setAlert, Adminlogin })(AdminLogin);
+export default connect(mapStateToProps, { Adminlogin })(AdminLogin);

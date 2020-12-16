@@ -79,8 +79,6 @@ const PostCard = ({ deletePost, recipe }) => {
 
 PostCard.propTypes = {
   recipe: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-
   deletePost: PropTypes.func.isRequired,
 };
 
